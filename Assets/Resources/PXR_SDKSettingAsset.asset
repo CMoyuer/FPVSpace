@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreSDKSetting: 1
   doNotShowBuildWarning: 1
-  appIDChecked: 1
+  appIDChecked: 0

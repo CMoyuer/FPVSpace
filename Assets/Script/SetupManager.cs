@@ -28,9 +28,9 @@ public class SetupManager : MonoBehaviour
             PlayerPrefs.SetFloat("SeeThroughPercent", value);
         });
         // 背景颜色
-        var r = PlayerPrefs.GetFloat("BackgroundColorR", 0.996f);
-        var g = PlayerPrefs.GetFloat("BackgroundColorG", 0.996f);
-        var b = PlayerPrefs.GetFloat("BackgroundColorB", 0.996f);
+        var r = PlayerPrefs.GetFloat("BackgroundColorR", 0);
+        var g = PlayerPrefs.GetFloat("BackgroundColorG", 0);
+        var b = PlayerPrefs.GetFloat("BackgroundColorB", 0);
         backgroundColor = new Color(r, g, b);
         passThroughManager.SetBackgroundColor(backgroundColor);
         sliderBackgroundColorR.value = r;
