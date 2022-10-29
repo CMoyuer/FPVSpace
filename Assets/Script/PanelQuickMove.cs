@@ -23,6 +23,7 @@ public class PanelQuickMove : MonoBehaviour
     public float minScale = 0.002f;
 
     private InputDevice[] controllers = new InputDevice[2];
+    private bool hasChanged = false;
     void Start()
     {
         var z = PlayerPrefs.GetFloat("PanelZ", 3);
@@ -52,7 +53,8 @@ public class PanelQuickMove : MonoBehaviour
                         position.z += primary2DAxis.y * Time.deltaTime * zMoveSpeed;
                         position.z = Mathf.Clamp(position.z, minDistance, maxDistance);
                         panel.localPosition = position;
-                        PlayerPrefs.GetFloat("PanelZ", position.z);
+                        PlayerPrefs.SetFloat("PanelZ", position.z);
+                        hasChanged = true;
                     }
 
                     // 缩放
@@ -62,7 +64,8 @@ public class PanelQuickMove : MonoBehaviour
                         var val = primary2DAxis.x * Time.deltaTime * scaleSpeed;
                         scale = Mathf.Clamp(scale + val, minScale, maxScale);
                         panel.transform.localScale = new Vector3(scale, scale, 1);
-                        PlayerPrefs.GetFloat("PanelScale", scale);
+                        PlayerPrefs.SetFloat("PanelScale", scale);
+                        hasChanged = true;
                     }
                 }
                 // YB键
@@ -72,7 +75,8 @@ public class PanelQuickMove : MonoBehaviour
                     position.y += Time.deltaTime * yMoveSpeed;
                     position.y = Mathf.Clamp(position.y, minHeight, maxHeight);
                     panel.localPosition = position;
-                    PlayerPrefs.GetFloat("PanelY", position.y);
+                    PlayerPrefs.SetFloat("PanelY", position.y);
+                    hasChanged = true;
                 }
                 else if (controller.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButton) && primaryButton)
                 {
@@ -80,8 +84,13 @@ public class PanelQuickMove : MonoBehaviour
                     position.y -= Time.deltaTime * yMoveSpeed;
                     position.y = Mathf.Clamp(position.y, minHeight, maxHeight);
                     panel.localPosition = position;
-                    PlayerPrefs.GetFloat("PanelY", position.y);
+                    PlayerPrefs.SetFloat("PanelY", position.y);
+                    hasChanged = true;
                 }
+            }
+            else if (hasChanged)
+            {
+                PlayerPrefs.Save();
             }
         }
     }

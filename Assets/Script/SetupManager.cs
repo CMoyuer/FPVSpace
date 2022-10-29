@@ -17,6 +17,7 @@ public class SetupManager : MonoBehaviour
 
     void Start()
     {
+
         // 透视率
         var seeThroughPercent = PlayerPrefs.GetFloat("SeeThroughPercent", 0.3f);
         passThroughManager.SetSeeThroughPercent(seeThroughPercent);
@@ -24,9 +25,11 @@ public class SetupManager : MonoBehaviour
         sliderTransparency.onValueChanged.AddListener((value) =>
         {
             value = 1 - value;
-            passThroughManager.SetSeeThroughPercent(value);
             PlayerPrefs.SetFloat("SeeThroughPercent", value);
+            PlayerPrefs.Save();
+            passThroughManager.SetSeeThroughPercent(value);
         });
+
         // 背景颜色
         var r = PlayerPrefs.GetFloat("BackgroundColorR", 0);
         var g = PlayerPrefs.GetFloat("BackgroundColorG", 0);
@@ -37,6 +40,7 @@ public class SetupManager : MonoBehaviour
         sliderBackgroundColorR.onValueChanged.AddListener((value) =>
         {
             PlayerPrefs.SetFloat("BackgroundColorR", value);
+            PlayerPrefs.Save();
             backgroundColor.r = value;
             passThroughManager.SetBackgroundColor(backgroundColor);
         });
@@ -44,6 +48,7 @@ public class SetupManager : MonoBehaviour
         sliderBackgroundColorG.onValueChanged.AddListener((value) =>
         {
             PlayerPrefs.SetFloat("BackgroundColorG", value);
+            PlayerPrefs.Save();
             backgroundColor.g = value;
             passThroughManager.SetBackgroundColor(backgroundColor);
         });
@@ -51,10 +56,10 @@ public class SetupManager : MonoBehaviour
         sliderBackgroundColorB.onValueChanged.AddListener((value) =>
         {
             PlayerPrefs.SetFloat("BackgroundColorB", value);
+            PlayerPrefs.Save();
             backgroundColor.b = value;
             passThroughManager.SetBackgroundColor(backgroundColor);
         });
-
     }
 
     // Update is called once per frame
