@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class PicoSystemService : MonoBehaviour
 {
-    public Text debugText;
     void Awake()
     {
         PXR_System.InitSystemService(gameObject.name);
@@ -16,7 +15,6 @@ public class PicoSystemService : MonoBehaviour
     void Start()
     {
         PXR_System.AppKeepAlive(Application.identifier, true, 0);
-        debugText.text = Application.identifier;
     }
 
 
