@@ -1,2 +1,2 @@
 # FPVSpace
-MR application designed for FPV
+PICO MR application designed for FPV
